@@ -133,7 +133,10 @@ myGcd a b
 -- 2. Within even and odd numbers the ordering is normal
 
 funnyCompare :: Int -> Int -> Ordering
-funnyCompare = undefined
+funnyCompare a b
+  | even a && odd b = LT
+  | odd a && even b = GT
+  | otherwise = compare a b
 
 -- Ex 15: Implement the function funnyMin that returns the minimum of
 -- its two arguments, according to the ordering implemented by
@@ -144,7 +147,15 @@ funnyCompare = undefined
 -- expression or define a helper function.
 
 funnyMin :: Int -> Int -> Int
-funnyMin = undefined
+funnyMin a b
+  | comp a b == LT = a
+  | comp a b == GT = b
+  | otherwise = a `min` b
+  where
+    comp a b
+      | even a && odd b = LT
+      | odd a && even b = GT
+      | otherwise = compare a b
 
 -- Ex 16: implement the recursive function pyramid that returns
 -- strings like this:
@@ -191,3 +202,4 @@ isPrime = undefined
 
 nextPrime :: Integer -> Integer
 nextPrime = undefined
+
